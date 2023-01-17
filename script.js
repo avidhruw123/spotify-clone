@@ -7,8 +7,7 @@ let masterPlay = document.getElementById('masterPlay');
 let myProgressBar = document.getElementById('myProgressBar');
 let gif = document.getElementById('gif');
 let songItems = Array.from(document.getElementsByClassName('songItem'));
-let s = document.getElementById('sec');
-let m = document.getElementById('min');
+
 
 
 let songs = [
@@ -78,25 +77,7 @@ const makeAllPlays=()=>{
         gif.style.opacity=1;
     })
 }
-////////////////////////
 
-const timer = ()=>{
-    let min=0;
-    let sec =0;
-    setInterval(()=>{
-        if(sec>=6){
-            sec=0;
-            min++;
-        } 
-        
-        document.getElementById('min').innerHTML = `0${min}`;
-        document.getElementById('sec').innerHTML = `:${sec++}`;    
-    },1000);  
-    
-}
-
-
-   //////////////////////////////////
 
 
 Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
