@@ -11,6 +11,7 @@ let songItems = Array.from(document.getElementsByClassName('songItem'));
 
 
 
+
 let songs = [
     {songName: "Warriyo - Mortals ", filePath: "songs/1.mp3", coverPath: "covers/1.jpg"},
     {songName: "Cielo - Huma-Huma", filePath: "songs/2.mp3", coverPath: "covers/2.jpg"},
@@ -28,13 +29,12 @@ let songs = [
 
 songItems.forEach((element,i)=>{
     // console.log(element, i);
+    
     element.getElementsByTagName('img')[0].src = songs[i].coverPath;
-    element.getElementsByClassName('songName')[0].innerText = songs[i].songName;    
+    element.getElementsByClassName('songName')[0].innerText = songs[i].songName;   
+    
+
 })
-
-
-
-
 
 //handling play pause 
 masterPlay.addEventListener('click',()=>{
@@ -51,7 +51,6 @@ masterPlay.addEventListener('click',()=>{
     }
 })
 
-
 /// duration of songs
 audioElement.addEventListener("timeupdate", ()=>{
 
@@ -59,7 +58,9 @@ audioElement.addEventListener("timeupdate", ()=>{
     let min = Math.floor(duration / 60);
     let sec = Math.floor(duration % 60);
 
-    document.getElementById('time').innerHTML = `${"0"+min+":"+sec}`;   
+ let minString = min < 10 ? "0" + min : min;
+let secString = sec < 10 ? "0" + sec : sec;
+document.getElementById('time').innerHTML = `${minString}:${secString}`;
 
 })
 
@@ -90,8 +91,7 @@ const makeAllPlays=()=>{
     Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
 
         element.classList.remove('fa-pause-circle');
-        element.classList.add('fa-play-circle');
-        
+        element.classList.add('fa-play-circle');        
     })
 }
 
@@ -99,6 +99,7 @@ const makeAllPlays=()=>{
 
 
 Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
+
     element.addEventListener('click',(e)=>{
         makeAllPlays();   
                   
@@ -116,12 +117,18 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
 })
 
 
+
+
+
+
 document.getElementById('next').addEventListener('click', ()=>{
+
     if(songIndex>=9){
         songIndex = 0
     }else{
         songIndex +=1;
     }   
+    
     audioElement.src = `songs/${songIndex+1}.mp3`;
     masterSongName.innerText = songs[songIndex].songName;
     audioElement.currentTime=0;
